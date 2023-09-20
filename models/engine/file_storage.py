@@ -13,7 +13,7 @@ class FileStorage:
         try:
             if cls:
                 fs = FileStorage.__objects
-            o_key = cls.__name__ 
+            o_key = cls.__name__
             new_objs = {}
             for key, value in fs.items():
                 class_name = key.split(".")[0]

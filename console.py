@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
 
     def parsestr(self, arg):
         """
-        parse input for do create and return 
+        parse input for do create and return
         dictionary to be used as arguments
         """
         narg = arg.split()[1:]
@@ -146,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
             return
         new_instance = HBNBCommand.classes[args.split()[0]]
         args = self.parsestr(args)
-        new_instance = new_instance(**args) 
+        new_instance = new_instance(**args)
         new_instance.save()
         print(new_instance.id)
 
@@ -345,6 +345,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

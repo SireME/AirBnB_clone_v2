@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a class to manage file storage for hbnb 
+"""This module defines a class to manage file storage for hbnb
 using a database clone
 """
 
@@ -9,7 +9,6 @@ class DBStorage:
     __engine = None
     __session = None
 
- 
     def __init__(self):
         from os import getenv
         from sqlalchemy import create_engine, MetaData
@@ -24,7 +23,7 @@ class DBStorage:
             metadata = MetaData()
             metadata.bind = engine
             metadata.drop_all(engine)
-    
+
     def all(self, cls=None):
         """Returns a dict of specific/all models currently in storage"""
         from models.user import User
@@ -51,7 +50,7 @@ class DBStorage:
         """Adds new object to current database session"""
         session = self.__session
         session.add(obj)
-    
+
     def save(self):
         """Permanently commit all changes to db session storage"""
         session = self.__session
@@ -64,7 +63,7 @@ class DBStorage:
         if obj:
             session = self.__session
             session.delete(obj)
-        
+
     def reload(self):
         """Loads storage dictionary from file"""
         from models.base_model import BaseModel
