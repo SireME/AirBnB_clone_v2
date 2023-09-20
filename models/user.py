@@ -13,3 +13,4 @@ class User(BaseModel, Base):
     first_name = Column(String(128))
     last_name = Column(String(128))
     places = rl("Place", back_populates="user", cascade="all, delete")
+    reviews = rl("Review", back_populates="user", cascade="all, delete")
