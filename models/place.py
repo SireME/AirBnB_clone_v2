@@ -32,3 +32,4 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=False)
     cities = rl("City", back_populates="places")
     user = rl("User", back_populates="places")
+    amenity_ids = []
