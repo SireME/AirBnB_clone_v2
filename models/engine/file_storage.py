@@ -8,8 +8,20 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    def all(self):
-        """Returns a dictionary of models currently in storage"""
+    def all(self, cls=None):
+        """Returns a dict of specific/all models currently in storage"""
+        try:
+            if cls:
+                fs = FileStorage.__objects
+            o_key = cls.__name__ 
+            new_objs = {}
+            for key, value in fs.items():
+                class_name = key.split(".")[0]
+                if class_name == o_key:
+                    new_objs[key] = value
+            return new_objs
+        except Exception:
+            pass
         return FileStorage.__objects
 
     def new(self, obj):
@@ -25,6 +37,16 @@ class FileStorage:
                 temp[key] = val.to_dict()
             json.dump(temp, f)
 
+    def delete(self, obj=None):
+        """
+        instance method to delete class from object list
+        """
+        try:
+            obj_key = obj.to_dict()['__class__'] + '.' + obj.id
+            del self.all()[obj_key]
+        except Exception:
+            pass
+
     def reload(self):
         """Loads storage dictionary from file"""
         from models.base_model import BaseModel
@@ -36,15 +58,15 @@ class FileStorage:
         from models.review import Review
 
         classes = {
-                    'BaseModel': BaseModel, 'User': User, 'Place': Place,
-                    'State': State, 'City': City, 'Amenity': Amenity,
-                    'Review': Review
-                  }
+                'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                'State': State, 'City': City, 'Amenity': Amenity,
+                'Review': Review
+                }
         try:
             temp = {}
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
