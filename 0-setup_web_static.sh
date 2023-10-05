@@ -24,7 +24,7 @@ update="location /hbnb_static {\
 	alias /data/web_static/current/;\
 	index index.html;\
 }"
-sudo sed -i "/listen 80;/a $update" /etc/nginx/sites-available/default
+sudo sed -i "/listen 80 default_server;/a $update" /etc/nginx/sites-available/default
 
 # restart nginx
 sudo service nginx restart
