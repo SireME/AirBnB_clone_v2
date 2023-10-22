@@ -10,14 +10,15 @@ from models.city import City
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
-    name = Column(String(128), nullable=False)
     if os.getenv("HBNB_TYPE_STORAGE") == 'db':
+        name = Column(String(128), nullable=False)
         cities = rl(
                 "City",
                 back_populates="state",
-                cascade='all, delete'
-                )
+                cascade='all, delete')
     else:
+        name = ""
+
         @property
         def cities(self):
             "return all cities in the state"
