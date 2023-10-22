@@ -64,6 +64,12 @@ class DBStorage:
             session = self.__session
             session.delete(obj)
 
+    def close(self):
+        """
+        class remove or close method
+        """
+        self.__session.remove()
+
     def reload(self):
         """Loads storage dictionary from file"""
         from models.base_model import BaseModel

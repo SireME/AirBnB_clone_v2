@@ -47,6 +47,12 @@ class FileStorage:
         except Exception:
             pass
 
+    def close(self):
+        """
+        add close method for deserialisation
+        """
+        self.reload()
+
     def reload(self):
         """Loads storage dictionary from file"""
         from models.base_model import BaseModel
