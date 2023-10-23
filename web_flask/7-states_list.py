@@ -24,7 +24,7 @@ def all_cities_by_states():
     for_page = {
             'states': all_states
     }
-    return render_template('8-cities_by_states.html', **for_page)
+    return render_template('7-states_list.html', **for_page)
 
 
 @app.teardown_appcontext
